@@ -12,6 +12,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { CartProvider } from "@/lib/cart";
+import { AppStoreProvider } from "@/lib/store";
 import { AppLoaderGate } from "@/components/app-loader-gate";
 
 function NotFoundComponent() {
@@ -87,6 +88,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: appCss,
       },
       { rel: "icon", type: "image/png", href: "/favicon.png" },
+      { rel: "manifest", href: "/manifest.webmanifest" },
       { rel: "apple-touch-icon", href: "/favicon.png" },
       {
         rel: "preconnect",
@@ -128,12 +130,14 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <AppStoreProvider>
       <CartProvider>
         <AppLoaderGate>
           {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
           <Outlet />
         </AppLoaderGate>
       </CartProvider>
+      </AppStoreProvider>
     </QueryClientProvider>
   );
 }

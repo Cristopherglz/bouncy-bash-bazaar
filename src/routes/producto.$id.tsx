@@ -48,9 +48,31 @@ function ProductoPage() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-8 pb-10">
         <div>
           <div className="card-fun p-3 relative overflow-hidden">
-            <div className="aspect-square rounded-2xl overflow-hidden bg-muted">
-              <img src={product.images[imgIdx]} alt={product.name} className="w-full h-full object-cover animate-pop-in" key={imgIdx} />
+            <div
+              className="flex aspect-square rounded-2xl overflow-x-auto overflow-y-hidden snap-x snap-mandatory no-scrollbar bg-muted"
+              style={{ touchAction: "pan-x" }}
+              onScroll={(e) => {
+                const el = e.currentTarget;
+                setImgIdx(Math.round(el.scrollLeft / el.clientWidth));
+              }}
+            >
+              {product.images.map((src: string, i: number) => (
+                <img
+                  key={i}
+                  src={src}
+                  alt={`${product.name} ${i + 1}`}
+                  draggable={false}
+                  className="w-full h-full shrink-0 snap-center object-cover select-none"
+                />
+              ))}
             </div>
+            {product.images.length > 1 && (
+              <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-1.5">
+                {product.images.map((_: string, i: number) => (
+                  <span key={i} className={`h-2 rounded-full transition-all ${i === imgIdx ? "w-6 bg-primary" : "w-2 bg-primary/30"}`} />
+                ))}
+              </div>
+            )}
             {discounted && (
               <div className="absolute top-6 left-6 rotate-[-8deg] bg-secondary text-secondary-foreground font-black font-display text-sm px-3 py-1.5 rounded-full shadow-md border-2 border-background animate-wiggle">
                 -{product.discountPct}%
@@ -100,7 +122,7 @@ function ProductoPage() {
           <div className="mt-8 grid sm:grid-cols-3 gap-3">
             {[
               { icon: Truck, t: "Envío a domicilio", s: "Posadas y alrededores" },
-              { icon: ShieldCheck, t: "Pago seguro", s: "Mercado Pago o efectivo" },
+              { icon: ShieldCheck, t: "Pago seguro", s: "Mercado Pago" },
               { icon: PartyPopper, t: "Stock listo", s: `${product.stock} disponibles` },
             ].map((f) => (
               <div key={f.t} className="card-fun p-3 flex items-start gap-2 text-sm">
