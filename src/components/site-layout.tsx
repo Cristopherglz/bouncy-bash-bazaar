@@ -143,7 +143,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
           <div className="border-t border-black/10">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 text-xs opacity-70 flex flex-wrap gap-2 justify-between">
               <span>© {new Date().getFullYear()} Papita's — Copetín & Cotillón</span>
-              <span className="inline-flex items-center gap-1"><Sparkles className="h-3 w-3" /> Desarrollado por Komuna Creativa&nbsp;</span>
+              <a href="https://komunacreativa.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 hover:underline"><Sparkles className="h-3 w-3" /> Desarrollado por Komuna Creativa&nbsp;</a>
             </div>
           </div>
         </div>
