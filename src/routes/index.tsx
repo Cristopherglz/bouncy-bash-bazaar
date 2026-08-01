@@ -41,7 +41,7 @@ function Home() {
               Tu fiesta <span className="gradient-text">arranca</span> acá 🎉
             </h1>
             <p className="mt-4 text-lg text-muted-foreground max-w-lg">
-              Snacks, golosinas, globos, vajilla y kits temáticos. Elegí, pagá con Mercado Pago y recibilo en tu casa o retiralo por el local.
+              Snacks, golosinas, globos, vajilla y kits temáticos. Elegí, pagá y recibilo en tu casa o retiralo por el local.
             </p>
 
             {/* Buscador */}
